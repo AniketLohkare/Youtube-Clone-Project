@@ -1,0 +1,6 @@
+=> description and comment (see more)
+=> Responsive video page
+=> subscribe channel page
+=> like, comment, subscribe, save
+=> search video + suggestion while typing
+=> sign in (authentication)
