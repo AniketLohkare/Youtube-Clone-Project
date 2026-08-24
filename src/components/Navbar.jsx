@@ -13,7 +13,7 @@ const Navbar = ({ setShowSidebar, setMobileSidebar }) => {
         {/* Mobile */}
         <button
           className='cursor-pointer rounded-full p-2 hover:bg-gray-200 sm:hidden'
-          onClick={() => setMobileSidebar((prev) => !prev)}
+          onClick={() => setMobileSidebar(true)}
         >
           <Menu className='w-4' />
         </button>

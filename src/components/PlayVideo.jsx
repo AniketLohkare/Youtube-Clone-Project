@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { formatNumber } from '../utils/formatNumber'
 import { timeAgo } from '../utils/timeAgo'
 import { Bookmark, Share, ThumbsDown, ThumbsUp } from 'lucide-react'
+import ShareModal from './ShareModal'
+import Overlay from './Overlay'
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
 const PlayVideo = ({ videoData, setVideoData }) => {
@@ -10,6 +12,9 @@ const PlayVideo = ({ videoData, setVideoData }) => {
   const [channelData, setChannelData] = useState(null)
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setIsDisliked] = useState(false)
+  const [showShareModal, setShowShareModal] = useState(false)
+  const [saveVideo, setSaveVideo] = useState(false)
+
   const { videoId } = useParams()
 
   const fetchVideoData = async () => {
@@ -20,7 +25,7 @@ const PlayVideo = ({ videoData, setVideoData }) => {
   }
 
   const fetchCommentsData = async () => {
-    const fetchCommentsDataUrl = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${API_KEY}`
+    const fetchCommentsDataUrl = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=5&videoId=${videoId}&key=${API_KEY}`
     const response = await fetch(fetchCommentsDataUrl)
     const data = await response.json()
     setCommentsData(data.items)
@@ -48,22 +53,24 @@ const PlayVideo = ({ videoData, setVideoData }) => {
   }, [videoData])
 
   return (
-    <div id='play-video' className='basis-7/10'>
-      <iframe
-        src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-        referrerPolicy='strict-origin-when-cross-origin'
-        allowFullScreen
-        className='h-[35vw] w-full rounded-xl'
-      ></iframe>
+    <div id='play-video' className='min-w-0 basis-6/10 xl:basis-7/10'>
+      <div className='aspect-video w-full'>
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+          referrerPolicy='strict-origin-when-cross-origin'
+          allowFullScreen
+          className='h-full w-full rounded-xl'
+        />
+      </div>
       <div className='flex flex-col gap-3 py-3'>
-        <div>
+        <div id='feedback'>
           <h2 id='title' className='text-xl font-bold'>
             {videoData ? videoData.snippet.title : ''}
           </h2>
           <div
             id='video-stats'
-            className='flex items-center justify-between text-sm'
+            className='flex flex-wrap items-center justify-between gap-2 text-sm'
           >
             <div className='text-gray-600'>
               <span>
@@ -75,23 +82,23 @@ const PlayVideo = ({ videoData, setVideoData }) => {
                 {videoData ? timeAgo(videoData.snippet.publishedAt) : ''} ago
               </span>
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-2 xs:gap-4'>
               <div className='flex overflow-hidden rounded-4xl bg-gray-200'>
                 <div
                   onClick={() => {
                     setIsLiked((prev) => !prev)
                     setIsDisliked(false)
                   }}
-                  className='flex cursor-pointer items-center gap-1 px-5 py-2 hover:bg-gray-300'
+                  className='xs:px-5 xs:py-2 flex cursor-pointer items-center gap-1 px-3 py-1 hover:bg-gray-300'
                 >
                   <button className='cursor-pointer'>
                     {isLiked ? (
-                      <ThumbsUp className='w-5 fill-black' />
+                      <ThumbsUp className='xs:w-5 w-4 fill-black' />
                     ) : (
-                      <ThumbsUp className='w-5' />
+                      <ThumbsUp className='xs:w-5 w-4' />
                     )}
                   </button>
-                  <span className='select-none'>
+                  <span className='text-sm select-none sm:text-[16px]'>
                     {videoData
                       ? formatNumber(videoData.statistics.likeCount)
                       : ''}
@@ -103,32 +110,52 @@ const PlayVideo = ({ videoData, setVideoData }) => {
                     setIsDisliked((prev) => !prev)
                     setIsLiked(false)
                   }}
-                  className='cursor-pointer px-5 py-2 hover:bg-gray-300'
+                  className='xs:px-5 xs:py-2 cursor-pointer px-3 py-1 hover:bg-gray-300'
                 >
                   {isDisliked ? (
-                    <ThumbsDown className='w-5 fill-black' />
+                    <ThumbsDown className='xs:w-5 w-4 fill-black' />
                   ) : (
-                    <ThumbsDown className='w-5' />
+                    <ThumbsDown className='xs:w-5 w-4' />
                   )}
                 </button>
               </div>
-              <div className='flex cursor-pointer items-center gap-1 rounded-4xl bg-gray-200 px-5 py-2 hover:bg-gray-300'>
+              <div
+                onClick={() => setShowShareModal(true)}
+                className='xs:px-5 xs:py-2 flex cursor-pointer items-center gap-1 rounded-4xl bg-gray-200 px-3 py-1 hover:bg-gray-300'
+              >
                 <button className='cursor-pointer'>
-                  <Share className='w-5' />
+                  <Share className='xs:w-5 w-4' />
                 </button>
-                <span>Share</span>
+                <span className='text-sm sm:text-[16px]'>Share</span>
               </div>
-              <div className='flex cursor-pointer items-center gap-1 rounded-4xl bg-gray-200 px-5 py-2 hover:bg-gray-300'>
+              {showShareModal && (
+                <>
+                  <Overlay onClick={() => setShowShareModal(false)} />
+                  <ShareModal setShowShareModal={setShowShareModal} />
+                </>
+              )}
+              <div
+                id='save-btn'
+                className='xs:px-5 xs:py-2 flex cursor-pointer items-center gap-1 rounded-4xl bg-gray-200 px-3 py-1 hover:bg-gray-300'
+                onClick={() => setSaveVideo(!saveVideo)}
+              >
                 <button className='cursor-pointer'>
-                  <Bookmark className='w-5' />
+                  {saveVideo ? (
+                    <Bookmark className='xs:w-5 w-4 fill-black' />
+                  ) : (
+                    <Bookmark className='xs:w-5 w-4' />
+                  )}
                 </button>
-                <span>Save</span>
+                <span className='text-sm sm:text-[16px]'>Save</span>
               </div>
             </div>
           </div>
         </div>
         <hr className='text-gray-400' />
-        <div className='flex items-center justify-between'>
+        <div
+          id='channel-subscription'
+          className='flex items-center justify-between'
+        >
           <div className='flex items-center gap-4'>
             <button className='cursor-pointer'>
               <img

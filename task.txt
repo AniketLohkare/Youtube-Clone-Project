@@ -1,6 +1,6 @@
+=> share modal
 => description and comment (see more)
-=> Responsive video page
-=> subscribe channel page
-=> like, comment, subscribe, save
 => search video + suggestion while typing
-=> sign in (authentication)
+=> like, comment, subscribe, save
+=> subscribe channel page
+=> Responsive home page
