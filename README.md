@@ -1,16 +1,105 @@
-# React + Vite
+# YouTube Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive YouTube clone built with React and Vite. The project recreates the core YouTube browsing experience, including video search, recommendations, video playback, and sharing.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+https://youtube-project-react.netlify.app/
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Responsive YouTube-style interface
+* Search videos using the YouTube Data API
+* Browse video results
+* Watch videos through an embedded player
+* Display recommended videos
+* Show video metadata such as views and upload time
+* Share videos using a share modal
+* Copy video links to the clipboard
+* Client-side routing with React Router
+* Responsive layouts for different screen sizes
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React
+* Vite
+* JavaScript
+* Tailwind CSS
+* React Router
+* YouTube Data API
+
+## Project Structure
+
+The application is divided into reusable React components and utility functions.
+
+```text
+src/
+├── components/
+├── pages/
+├── utils/
+├── App.jsx
+└── main.jsx
+```
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd <project-folder>
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Add your API key
+
+Create a `.env` file in the project root:
+
+```env
+VITE_YOUTUBE_API_KEY=your_api_key_here
+```
+
+You can obtain a YouTube Data API key through Google Cloud.
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+The application will be available at the local development URL shown by Vite.
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## What I Learned
+
+This project helped me practice:
+
+* Building reusable React components
+* Managing state with React hooks
+* Fetching and handling data from an external REST API
+* Working with React Router
+* Creating responsive layouts with Tailwind CSS
+* Handling asynchronous operations
+* Working with environment variables in Vite
+* Designing layouts that adapt to different screen sizes
+* Structuring a React application into reusable components
+
+## Disclaimer
+
+This project is created for educational and portfolio purposes. It is not affiliated with or endorsed by YouTube or Google.
