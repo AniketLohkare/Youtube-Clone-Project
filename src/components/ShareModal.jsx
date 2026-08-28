@@ -90,7 +90,7 @@ const ShareModal = ({ setShowShareModal }) => {
         <div className='flex items-center justify-between gap-2 rounded-md border border-gray-300 p-1 sm:gap-5 sm:rounded-lg sm:border-2 sm:p-2'>
           <div className='flex flex-1 items-center gap-1'>
             <Link className='h-3 w-3 sm:h-5 sm:w-5' />
-            <span className='text-xs select-none sm:text-lg'>
+            <span className='truncate text-xs select-none sm:text-lg'>
               {url.slice(0, 25)}...
             </span>
           </div>
