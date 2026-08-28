@@ -5,7 +5,7 @@ import {
   Tv,
   Cpu,
   Music,
-  UserRound,
+  Clapperboard,
   Newspaper,
   Home,
 } from 'lucide-react'
@@ -18,6 +18,6 @@ export const categories = [
   { name: 'Entertainment', slug: 'entertainment', id: 24, icon: Tv },
   { name: 'Technology', slug: 'technology', id: 28, icon: Cpu },
   { name: 'Music', slug: 'music', id: 10, icon: Music },
-  { name: 'Blogs', slug: 'blogs', id: 22, icon: UserRound },
+  { name: 'Blogs', slug: 'blogs', id: 22, icon: Clapperboard  },
   { name: 'News', slug: 'news', id: 25, icon: Newspaper },
 ]

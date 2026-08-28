@@ -65,12 +65,12 @@ const PlayVideo = ({ videoData, setVideoData }) => {
       </div>
       <div className='flex flex-col gap-3 py-3'>
         <div id='feedback'>
-          <h2 id='title' className='text-xl font-bold'>
+          <h2 id='title' className='text-xl line-clamp-3 font-bold'>
             {videoData ? videoData.snippet.title : ''}
           </h2>
           <div
             id='video-stats'
-            className='flex flex-wrap items-center justify-between gap-2 text-sm'
+            className='mt-2 flex flex-wrap items-center justify-between gap-2 text-sm'
           >
             <div className='text-gray-600'>
               <span>
@@ -82,7 +82,7 @@ const PlayVideo = ({ videoData, setVideoData }) => {
                 {videoData ? timeAgo(videoData.snippet.publishedAt) : ''} ago
               </span>
             </div>
-            <div className='flex items-center gap-2 xs:gap-4'>
+            <div className='xs:gap-4 flex items-center gap-2'>
               <div className='flex overflow-hidden rounded-4xl bg-gray-200'>
                 <div
                   onClick={() => {
@@ -210,7 +210,7 @@ const PlayVideo = ({ videoData, setVideoData }) => {
                     }
                     alt='user profile'
                   />
-                  <div className='flex flex-col justify-center'>
+                  <div className='flex min-w-0 flex-col justify-center'>
                     <div>
                       <span className='text-sm font-semibold'>
                         {
