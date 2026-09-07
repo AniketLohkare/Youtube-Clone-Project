@@ -8,25 +8,25 @@ https://youtube-project-react.netlify.app/
 
 ## Features
 
-* Responsive YouTube-style interface
-* Search videos using the YouTube Data API
-* Browse video results
-* Watch videos through an embedded player
-* Display recommended videos
-* Show video metadata such as views and upload time
-* Share videos using a share modal
-* Copy video links to the clipboard
-* Client-side routing with React Router
-* Responsive layouts for different screen sizes
+- Responsive YouTube-style interface
+- Search videos using the YouTube Data API
+- Browse video results
+- Watch videos through an embedded player
+- Display recommended videos
+- Show video metadata such as views and upload time
+- Share videos using a share modal
+- Copy video links to the clipboard
+- Client-side routing with React Router
+- Responsive layouts for different screen sizes
 
 ## Tech Stack
 
-* React
-* Vite
-* JavaScript
-* Tailwind CSS
-* React Router
-* YouTube Data API
+- React
+- Vite
+- JavaScript
+- Tailwind CSS
+- React Router
+- YouTube Data API
 
 ## Project Structure
 
@@ -90,15 +90,15 @@ npm run preview
 
 This project helped me practice:
 
-* Building reusable React components
-* Managing state with React hooks
-* Fetching and handling data from an external REST API
-* Working with React Router
-* Creating responsive layouts with Tailwind CSS
-* Handling asynchronous operations
-* Working with environment variables in Vite
-* Designing layouts that adapt to different screen sizes
-* Structuring a React application into reusable components
+- Building reusable React components
+- Managing state with React hooks
+- Fetching and handling data from an external REST API
+- Working with React Router
+- Creating responsive layouts with Tailwind CSS
+- Handling asynchronous operations
+- Working with environment variables in Vite
+- Designing layouts that adapt to different screen sizes
+- Structuring a React application into reusable components
 
 ## Disclaimer
 

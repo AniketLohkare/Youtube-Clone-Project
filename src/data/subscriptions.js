@@ -10,9 +10,4 @@ export const subscriptions = [
   { name: 'Justin Bieber', pfp: tom },
   { name: '5-Minutes Crafts', pfp: megan },
   { name: 'Nas Daily', pfp: cameron },
-  { name: 'PweDiePie', pfp: jack },
-  { name: 'MrBeast', pfp: simon },
-  { name: 'Justin Bieber', pfp: tom },
-  { name: '5-Minutes Crafts', pfp: megan },
-  { name: 'Nas Daily', pfp: cameron },
 ]

@@ -4,7 +4,7 @@ import { subscriptions } from '../data/subscriptions'
 
 const Sidebar = ({ desktopSidebar, setMobileSidebar }) => {
   return (
-    <div className=' flex flex-col gap-3 self-start sm:gap-5'>
+    <div className='flex flex-col gap-3 self-start sm:gap-5'>
       <div
         id='category-div'
         className='flex flex-col justify-center gap-0.5 text-xs md:text-[16px]'

@@ -20,7 +20,6 @@ const App = () => {
           setMobileSidebar={setMobileSidebar}
           setDesktopSidebar={setDesktopSidebar}
         />
-        
       </header>
       <main className='flex'>
         {/* Mobile & Tablet Sidebar */}

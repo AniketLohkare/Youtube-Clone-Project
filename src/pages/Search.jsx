@@ -10,7 +10,7 @@ const Search = () => {
   const [results, setResults] = useState([])
 
   const fetchResults = async () => {
-    const fetchResultsUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(query)}&key=${API_KEY}`
+    const fetchResultsUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&type=video&q=${encodeURIComponent(query)}&key=${API_KEY}`
     const response = await fetch(fetchResultsUrl)
     const data = await response.json()
     setResults(data.items)
@@ -20,19 +20,22 @@ const Search = () => {
     fetchResults()
   }, [query])
 
+  console.log(results)
+
   return (
     <div className='flex flex-col gap-4'>
       {results.map((result) => (
         <Link
+          to={`/video/${result.id.videoId}`}
           key={result.id.videoId}
-          className='flex flex-col gap-4 sm:flex-row'
+          className='flex min-w-0 flex-col gap-4 sm:flex-row'
         >
           <img
             className='w-full shrink-0 self-start rounded-xl sm:max-w-xs lg:max-w-md'
             src={result.snippet.thumbnails.medium.url}
             alt='thumbnail'
           />
-          <div className='flex flex-col gap-1'>
+          <div className='flex min-w-0 flex-col gap-1'>
             <h3 className='line-clamp-2 text-lg font-semibold lg:line-clamp-3'>
               {result.snippet.title}
             </h3>

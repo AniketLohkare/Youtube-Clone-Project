@@ -12,6 +12,7 @@ const PlayVideo = ({ videoData, setVideoData }) => {
   const [channelData, setChannelData] = useState(null)
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setIsDisliked] = useState(false)
+  const [isSubscribed, setIsSubscribed] = useState(false)
   const [showShareModal, setShowShareModal] = useState(false)
   const [saveVideo, setSaveVideo] = useState(false)
 
@@ -183,8 +184,11 @@ const PlayVideo = ({ videoData, setVideoData }) => {
               </span>
             </div>
           </div>
-          <button className='min-w-0 cursor-pointer rounded bg-red-500 px-5 py-1.5 text-sm text-white sm:px-7 sm:py-2 sm:text-[16px]'>
-            Subscribe
+          <button
+            onClick={() => setIsSubscribed((prev) => !prev)}
+            className={`w-34 min-w-0 cursor-pointer rounded py-1.5 text-sm text-white sm:py-2 sm:text-[16px] md:w-40 ${isSubscribed ? 'bg-pink-500' : 'bg-red-500'}`}
+          >
+            {isSubscribed ? 'Subscribed' : 'Subscribe'}
           </button>
         </div>
         <div
