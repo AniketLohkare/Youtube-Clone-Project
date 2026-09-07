@@ -2,12 +2,12 @@ import { NavLink } from 'react-router-dom'
 import { categories } from '../data/categories'
 import { subscriptions } from '../data/subscriptions'
 
-const Sidebar = ({ showSidebar, setMobileSidebar }) => {
+const Sidebar = ({ desktopSidebar, setMobileSidebar }) => {
   return (
-    <div className='sticky flex flex-col gap-3 self-start sm:gap-5'>
+    <div className=' flex flex-col gap-3 self-start sm:gap-5'>
       <div
         id='category-div'
-        className='flex flex-col justify-center gap-0.5 text-xs sm:text-[16px]'
+        className='flex flex-col justify-center gap-0.5 text-xs md:text-[16px]'
       >
         {categories.map((category) => (
           <NavLink
@@ -18,9 +18,9 @@ const Sidebar = ({ showSidebar, setMobileSidebar }) => {
             }
             onClick={() => setMobileSidebar(false)}
           >
-            {<category.icon className='w-4 sm:w-6' />}
-            {showSidebar && (
-              <span className='text-xs sm:text-[16px]'>{category.name}</span>
+            {<category.icon className='w-4 shrink-0 sm:w-6' />}
+            {desktopSidebar && (
+              <span className='text-xs md:text-[16px]'>{category.name}</span>
             )}
           </NavLink>
         ))}
@@ -28,9 +28,9 @@ const Sidebar = ({ showSidebar, setMobileSidebar }) => {
       <hr className='w-full text-gray-400' />
       <div
         id='subscribe-div'
-        className='flex flex-col justify-center gap-0.5 text-xs sm:text-[16px]'
+        className='flex flex-col justify-center gap-0.5 text-xs md:text-[16px]'
       >
-        {showSidebar && (
+        {desktopSidebar && (
           <h3 className='p-1 font-semibold text-gray-600 sm:p-3'>
             SUBSCRIPTIONS
           </h3>
@@ -45,7 +45,7 @@ const Sidebar = ({ showSidebar, setMobileSidebar }) => {
             onClick={() => setMobileSidebar(false)}
           >
             <img className='w-6 rounded-full' src={channel.pfp} />
-            {showSidebar && (
+            {desktopSidebar && (
               <span className='line-clamp-1'>{channel.name}</span>
             )}
           </NavLink>

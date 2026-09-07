@@ -23,14 +23,14 @@ const Recommended = ({ videoData }) => {
   return (
     <div
       id='recommended-videos'
-      className='grid lg:max-h-0 basis-4/10 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-0.5 xl:basis-3/10'
+      className='grid basis-[35%] grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-1 sm:grid-cols-[repeat(auto-fit,minmax(330px,1fr))] lg:max-h-0'
     >
       {recommendedVideos.map((videoData) => {
         return (
           <Link
             key={videoData.id}
             to={`/video/${videoData.id}`}
-            className='flex flex-col gap-3 self-start p-1.5 hover:bg-gray-200 lg:flex-row'
+            className='flex flex-col gap-3 self-start p-1.5 hover:bg-gray-200 sm:transition-all sm:duration-200 sm:ease-in-out sm:hover:scale-105 lg:flex-row'
           >
             <div className='aspect-video shrink-0 lg:w-3/5'>
               <img
@@ -43,9 +43,9 @@ const Recommended = ({ videoData }) => {
               <h3 className='line-clamp-2 text-sm font-bold'>
                 {videoData.snippet.title}
               </h3>
-              <span className='line-clamp-1 text-sm font-medium'>
+              <h4 className='line-clamp-1 text-sm font-medium'>
                 {videoData.snippet.channelTitle}
-              </span>
+              </h4>
               <span className='text-xs'>
                 {formatNumber(videoData.statistics.viewCount)} views
               </span>

@@ -1,6 +1,8 @@
-=> share modal
-=> description and comment (see more)
 => search video + suggestion while typing
+=> sign-in sign-out
+=> description and comment (see more)
 => like, comment, subscribe, save
 => subscribe channel page
-=> Responsive home page
+
+
+=> make scrollbar for xl & lg some definite width so that section can have definite margin left 

@@ -2,7 +2,7 @@ import Feed from '../components/Feed'
 
 const Home = () => {
   return (
-    <div className='flex'>
+    <div className='flex min-w-0'>
       <Feed />
     </div>
   )

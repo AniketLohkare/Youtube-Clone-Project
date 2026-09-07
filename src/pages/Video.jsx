@@ -5,7 +5,7 @@ import Recommended from '../components/Recommended'
 const Video = () => {
   const [videoData, setVideoData] = useState(null)
   return (
-    <div className='flex flex-col gap-5 lg:flex-row'>
+    <div className='flex flex-col gap-5 xl:flex-row'>
       <PlayVideo videoData={videoData} setVideoData={setVideoData} />
       <Recommended videoData={videoData} />
     </div>

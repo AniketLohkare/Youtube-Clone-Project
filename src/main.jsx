@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 import Video from './pages/Video'
+import Search from './pages/Search'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/:category',
         element: <Home />,
+      },
+      {
+        path: '/search',
+        element: <Search />,
       },
     ],
   },

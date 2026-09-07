@@ -29,14 +29,14 @@ const Feed = () => {
     <section
       id='feed'
       className={
-        'grid flex-1 grid-cols-[repeat(auto-fit,minmax(310px,1fr))] gap-1'
+        'grid flex-1 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-3 sm:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] sm:gap-1'
       }
     >
       {popularVideosData.map((videoData) => (
         <Link
           key={videoData.id}
           to={`/video/${videoData.id}`}
-          className='s flex flex-col self-start rounded-xl p-3 transition-all duration-200 ease-in-out hover:scale-105 hover:bg-gray-200'
+          className='flex flex-col self-start rounded-xl p-2 hover:bg-gray-200 sm:p-3 sm:transition-all sm:duration-200 sm:ease-in-out sm:hover:scale-105'
         >
           <img
             className='rounded-lg'
@@ -46,9 +46,9 @@ const Feed = () => {
           <h3 className='line-clamp-2 font-semibold'>
             {videoData.snippet.title}
           </h3>
-          <span className='text-sm font-semibold text-neutral-600'>
+          <h4 className='text-sm font-semibold text-neutral-600'>
             {videoData.snippet.channelTitle}
-          </span>
+          </h4>
           <div className='flex items-center text-sm text-gray-600'>
             <span>{formatNumber(videoData.statistics.viewCount)}</span>
             &nbsp;views &bull;&nbsp;
