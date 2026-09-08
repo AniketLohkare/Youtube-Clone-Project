@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Sidebar from './components/Sidebar'
 import ScrollToTop from './components/ScrollToTop'
 import Overlay from './components/Overlay'
@@ -8,13 +8,14 @@ import Overlay from './components/Overlay'
 const App = () => {
   const [mobileSidebar, setMobileSidebar] = useState(false)
   const [desktopSidebar, setDesktopSidebar] = useState(true)
+  const contentRef = useRef(null)
 
   return (
     <div
       id='app'
       className='mx-auto max-w-screen-2xl overflow-hidden font-sans'
     >
-      <ScrollToTop />
+      <ScrollToTop scrollRef={contentRef} />
       <header className='sticky top-0 z-50 flex h-12 items-center bg-white shadow-lg md:h-15'>
         <Navbar
           setMobileSidebar={setMobileSidebar}
@@ -40,7 +41,10 @@ const App = () => {
         >
           <Sidebar desktopSidebar={desktopSidebar} />
         </aside>
-        <section className='h-[calc(100vh-48px)] min-w-0 flex-1 overflow-y-auto bg-zinc-50 p-3 sm:px-5 sm:py-4 md:h-[calc(100vh-60px)]'>
+        <section
+          ref={contentRef}
+          className='h-[calc(100vh-48px)] min-w-0 flex-1 overflow-y-auto bg-zinc-50 p-3 sm:px-5 sm:py-4 md:h-[calc(100vh-60px)]'
+        >
           <Outlet />
         </section>
       </main>
