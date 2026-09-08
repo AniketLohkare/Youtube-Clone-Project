@@ -16,7 +16,9 @@ const Sidebar = ({ desktopSidebar, setMobileSidebar }) => {
             className={({ isActive }) =>
               `${isActive ? 'bg-slate-300 font-semibold' : 'hover:bg-gray-200'} flex cursor-pointer items-center gap-3 rounded-lg p-1 sm:gap-4 sm:p-2 lg:gap-5 lg:p-3`
             }
-            onClick={() => setMobileSidebar(false)}
+            onClick={
+              setMobileSidebar ? () => setMobileSidebar(false) : undefined
+            }
           >
             {<category.icon className='w-4 shrink-0 sm:w-6' />}
             {desktopSidebar && (
@@ -38,11 +40,12 @@ const Sidebar = ({ desktopSidebar, setMobileSidebar }) => {
         {subscriptions.map((channel, index) => (
           <NavLink
             key={index}
-            to={'/channel/${channel.name}'}
-            className={({ isActive }) =>
-              `${isActive ? 'bg-slate-300 font-semibold' : 'hover:bg-gray-200'} flex cursor-pointer items-center gap-3 rounded-lg p-1 sm:gap-4 sm:p-2 lg:gap-5 lg:p-3`
+            className={
+              'flex cursor-pointer items-center gap-3 rounded-lg p-1 hover:bg-gray-200 sm:gap-4 sm:p-2 lg:gap-5 lg:p-3'
             }
-            onClick={() => setMobileSidebar(false)}
+            onClick={
+              setMobileSidebar ? () => setMobileSidebar(false) : undefined
+            }
           >
             <img className='w-6 rounded-full' src={channel.pfp} />
             {desktopSidebar && (
