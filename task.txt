@@ -3,6 +3,3 @@
 => description and comment (see more)
 => like, comment, subscribe, save
 => subscribe channel page
-
-
-=> make scrollbar for xl & lg some definite width so that section can have definite margin left 

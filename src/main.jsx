@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 import Video from './pages/Video'
 import Search from './pages/Search'
+import Channel from './pages/Channel'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/search',
         element: <Search />,
+      },
+      {
+        path: '/channel/:channelId',
+        element: <Channel />,
       },
     ],
   },

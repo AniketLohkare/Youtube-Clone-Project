@@ -1,5 +1,5 @@
-import { formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNowStrict } from 'date-fns'
 
 export const timeAgo = (date) => {
-  return formatDistanceToNow(new Date(date)).replace('about ', '')
+  return formatDistanceToNowStrict(new Date(date))
 }

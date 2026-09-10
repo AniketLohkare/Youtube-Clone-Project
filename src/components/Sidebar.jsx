@@ -39,6 +39,7 @@ const Sidebar = ({ desktopSidebar, setMobileSidebar }) => {
         )}
         {subscriptions.map((channel, index) => (
           <NavLink
+            to={`channel/${channel.channelId}`}
             key={index}
             className={
               'flex cursor-pointer items-center gap-3 rounded-lg p-1 hover:bg-gray-200 sm:gap-4 sm:p-2 lg:gap-5 lg:p-3'
@@ -47,7 +48,7 @@ const Sidebar = ({ desktopSidebar, setMobileSidebar }) => {
               setMobileSidebar ? () => setMobileSidebar(false) : undefined
             }
           >
-            <img className='w-6 rounded-full' src={channel.pfp} />
+            <img className='w-6 rounded-full' src={channel.channelLogo} />
             {desktopSidebar && (
               <span className='line-clamp-1'>{channel.name}</span>
             )}
