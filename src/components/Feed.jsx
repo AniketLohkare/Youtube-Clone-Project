@@ -23,7 +23,37 @@ const Feed = () => {
       if (!response.ok)
         throw new Error(`Failed to fetch videos: ${response.status}`)
       const data = await response.json()
-      setPopularVideosData(data.items || [])
+      const popularVideosInitialData = data.items || []
+      if (popularVideosInitialData.length === 0) {
+        setPopularVideosData([])
+        return
+      }
+
+      const channelIds = [
+        ...new Set(
+          popularVideosInitialData.map((video) => video.snippet.channelId),
+        ),
+      ].join(',')
+
+      const fetchChannelsDataUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelIds}&key=${API_KEY}`
+      const channelsDataResponse = await fetch(fetchChannelsDataUrl)
+      if (!channelsDataResponse.ok) {
+        throw new Error(
+          `Failed to fetch channels information: ${channelsDataResponse.status}`,
+        )
+      }
+      const { items: channelsData } = await channelsDataResponse.json()
+
+      const channelsThumbnail = Object.fromEntries(
+        channelsData.map((channel) => [channel.id, channel.snippet.thumbnails]),
+      )
+
+      const popularVideosFinalData = popularVideosInitialData.map((video) => ({
+        ...video,
+        thumbnails: channelsThumbnail[video.snippet.channelId],
+      }))
+
+      setPopularVideosData(popularVideosFinalData)
     } catch (error) {
       console.error(error)
       setError('Failed to load videos. Please try again.')
@@ -37,7 +67,7 @@ const Feed = () => {
   return (
     <section
       id='feed'
-      className='grid flex-1 grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+      className='grid flex-1 grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2 lg:grid-cols-3'
     >
       {error ? (
         <p>{error}</p>
@@ -53,16 +83,25 @@ const Feed = () => {
               src={videoData.snippet.thumbnails.medium.url}
               alt='thumbnail image'
             />
-            <h3 className='line-clamp-2 mt-1 font-semibold'>
-              {videoData.snippet.title}
-            </h3>
-            <h4 className='text-sm font-semibold text-neutral-600'>
-              {videoData.snippet.channelTitle}
-            </h4>
-            <div className='flex items-center text-sm text-gray-600'>
-              <span>{formatNumber(videoData.statistics.viewCount)}</span>
-              &nbsp;views &bull;&nbsp;
-              <span>{timeAgo(videoData.snippet.publishedAt)} ago</span>
+            <div className='flex gap-2 pt-2'>
+              <img
+                src={videoData.thumbnails.default.url}
+                alt='channel thumbnail'
+                className='mt-0.5 h-8 w-8 rounded-full md:h-9 md:w-9'
+              />
+              <div>
+                <h3 className='line-clamp-2 font-semibold'>
+                  {videoData.snippet.title}
+                </h3>
+                <h4 className='text-sm font-semibold text-neutral-600'>
+                  {videoData.snippet.channelTitle}
+                </h4>
+                <div className='flex items-center text-sm text-gray-600'>
+                  <span>{formatNumber(videoData.statistics.viewCount)}</span>
+                  &nbsp;views &bull;&nbsp;
+                  <span>{timeAgo(videoData.snippet.publishedAt)} ago</span>
+                </div>
+              </div>
             </div>
           </Link>
         ))

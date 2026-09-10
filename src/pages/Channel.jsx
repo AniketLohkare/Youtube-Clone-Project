@@ -87,7 +87,7 @@ const Channel = () => {
             {/* Banner */}
             <div className='h-[24vw] w-full overflow-hidden rounded-xl bg-gray-200 md:h-[12vw]'>
               <img
-                src={channelData?.brandingSettings.image.bannerExternalUrl}
+                src={channelData?.brandingSettings?.image?.bannerExternalUrl}
                 alt='Channel banner'
                 className='h-full w-full scale-150 object-cover md:scale-100'
               />
@@ -97,7 +97,7 @@ const Channel = () => {
             <div className='flex flex-col gap-5 py-6 md:flex-row md:items-center'>
               {/* Avatar */}
               <img
-                src={channelData?.snippet.thumbnails.default.url}
+                src={channelData?.snippet?.thumbnails?.default?.url}
                 alt={'Channel logo'}
                 className='h-28 w-28 rounded-full object-cover'
               />
