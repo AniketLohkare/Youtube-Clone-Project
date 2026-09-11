@@ -20,6 +20,7 @@ const Search = () => {
       if (!response.ok)
         throw new Error(`Failed to fetch searched videos: ${response.status}`)
       const data = await response.json()
+      if (!data) throw new Error('Search result not found.')
       const searchResults = data.items || []
 
       // if no videos found
@@ -81,10 +82,11 @@ const Search = () => {
       }))
 
       setResults(enrichedResults)
-      setIsLoading(false)
     } catch (error) {
       console.error(error)
       setError('Failed to load search results. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 

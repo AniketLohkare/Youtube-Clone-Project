@@ -66,10 +66,11 @@ const Channel = () => {
         throw new Error(`Failed to fetch videos data: ${response.status}`)
       const data = await response.json()
       setVideosData(data.items || [])
-      setIsLoading(false)
     } catch (error) {
       console.error(error)
-      if (!error) setError('Failed to load videos. Please try again.')
+      setError('Failed to load videos. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 

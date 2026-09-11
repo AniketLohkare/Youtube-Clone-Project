@@ -22,14 +22,15 @@ const Recommended = ({ videoData }) => {
           `Failed to fetch recommended videos: ${response.status}`,
         )
       const data = await response.json()
-      const filteredList = data.items.filter(
+      const filteredList = (data.items || []).filter(
         (video) => video.id !== videoData.id,
       )
       setRecommendedVideos(filteredList || [])
-      setIsLoading(false)
     } catch (error) {
       console.error(error)
       setError('Failed to load recommended videos. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 

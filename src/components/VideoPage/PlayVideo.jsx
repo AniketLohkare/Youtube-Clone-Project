@@ -32,6 +32,9 @@ const PlayVideo = ({ videoData, setVideoData }) => {
       if (!response.ok)
         throw new Error(`Failed to fetch video: ${response.status}`)
       const data = await response.json()
+      if (!data.items?.length) {
+        throw new Error('Video not found')
+      }
       setVideoData(data.items[0])
     } catch (error) {
       console.error(error)
@@ -47,9 +50,10 @@ const PlayVideo = ({ videoData, setVideoData }) => {
         throw new Error(`Failed to fetch comments: ${response.status}`)
       const data = await response.json()
       setCommentsData(data.items)
-      SetAreCommentsLoaded(true)
     } catch (error) {
       console.error(error)
+    } finally {
+      SetAreCommentsLoaded(true)
     }
   }
 
@@ -63,9 +67,10 @@ const PlayVideo = ({ videoData, setVideoData }) => {
         throw new Error(`Failed to fetch channel data: ${response.status}`)
       const data = await response.json()
       setChannelData(data.items[0])
-      setIsVideoLoaded(true)
     } catch (error) {
       console.error(error)
+    } finally {
+      setIsVideoLoaded(true)
     }
   }
 

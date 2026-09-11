@@ -30,7 +30,6 @@ const Feed = () => {
       const popularVideosInitialData = data.items || []
       if (popularVideosInitialData.length === 0) {
         setPopularVideosData([])
-        setIsLoading(false)
         return
       }
 
@@ -59,10 +58,11 @@ const Feed = () => {
       }))
 
       setPopularVideosData(popularVideosFinalData)
-      setIsLoading(false)
     } catch (error) {
       console.error(error)
       setError('Failed to load videos. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
