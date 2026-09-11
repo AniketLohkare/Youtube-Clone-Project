@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { formatNumber } from '../utils/formatNumber'
 import { timeAgo } from '../utils/timeAgo'
+import ChannelSkeleton from '../skeletons/ChannelSkeleton'
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
 const Channel = () => {
@@ -9,6 +10,8 @@ const Channel = () => {
   const [videosData, setVideosData] = useState(null)
   const [error, setError] = useState(null)
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
   const { channelId } = useParams()
 
   const fetchChannelData = async () => {
@@ -50,19 +53,20 @@ const Channel = () => {
       // Find playlist with 12+ videos
       let playlistId = undefined
       for (const playlist of playlistData) {
-        if (playlist.contentDetails.itemCount >= 12) {
+        if (playlist.contentDetails.itemCount >= 24) {
           playlistId = playlist.id
           break
         }
       }
 
       // Fetch videos data
-      const fetchVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${playlistId}&maxResults=30&key=${API_KEY}`
+      const fetchVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${playlistId}&maxResults=24&key=${API_KEY}`
       const response = await fetch(fetchVideosUrl)
       if (!response.ok)
         throw new Error(`Failed to fetch videos data: ${response.status}`)
       const data = await response.json()
       setVideosData(data.items || [])
+      setIsLoading(false)
     } catch (error) {
       console.error(error)
       if (!error) setError('Failed to load videos. Please try again.')
@@ -76,6 +80,8 @@ const Channel = () => {
     setIsSubscribed(false)
   }, [channelId])
 
+  if (isLoading) return <ChannelSkeleton />
+
   return (
     <>
       {error ? (
@@ -85,7 +91,7 @@ const Channel = () => {
           {/* Channel Header */}
           <section className='mx-auto max-w-6xl'>
             {/* Banner */}
-            <div className='h-[24vw] w-full overflow-hidden rounded-xl bg-gray-200 md:h-[12vw]'>
+            <div className='h-[24vw] w-full overflow-hidden rounded-xl bg-gray-200 md:h-[12vw] dark:bg-white/20'>
               <img
                 src={channelData?.brandingSettings?.image?.bannerExternalUrl}
                 alt='Channel banner'
@@ -108,23 +114,27 @@ const Channel = () => {
                   {channelData?.snippet.title}
                 </h1>
 
-                <p className='mt-1 text-sm text-gray-500'>
+                <p className='mt-1 text-sm text-gray-500 dark:text-gray-300'>
                   {channelData?.snippet.customUrl}
                 </p>
 
-                <p className='mt-2 text-sm text-gray-600'>
+                <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
                   {formatNumber(channelData?.statistics.subscriberCount)}{' '}
                   subscribers
                 </p>
 
-                <p className='mt-3 line-clamp-4 max-w-2xl text-sm leading-6 text-gray-600'>
+                <p className='mt-3 line-clamp-4 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-400'>
                   {channelData?.snippet.description}
                 </p>
 
                 <button
                   onClick={() => setIsSubscribed((prev) => !prev)}
                   type='button'
-                  className={`mt-4 cursor-pointer rounded-full px-5 py-2 text-sm font-medium text-white ${isSubscribed ? 'bg-black' : 'bg-red-500'}`}
+                  className={`mt-4 cursor-pointer rounded-full px-5 py-2 text-sm font-medium ${
+                    isSubscribed
+                      ? 'bg-neutral-200 text-neutral-800 hover:bg-neutral-300 dark:bg-white/10 dark:text-neutral-200 dark:hover:bg-white/20'
+                      : 'bg-red-600 text-white hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-700'
+                  }`}
                 >
                   {isSubscribed ? 'Subscribed' : 'Subscribe'}
                 </button>
@@ -142,7 +152,7 @@ const Channel = () => {
                 <Link
                   to={`/video/${video.snippet.resourceId.videoId}`}
                   key={video.id}
-                  className='min-w-0 p-2 transition-all duration-200 ease-in-out hover:scale-105 hover:bg-gray-200'
+                  className='min-w-0 p-2 transition-all duration-200 ease-in-out hover:scale-105 hover:bg-gray-200 dark:hover:bg-white/20'
                 >
                   <img
                     src={
@@ -158,7 +168,7 @@ const Channel = () => {
                     {video.snippet.title}
                   </h3>
 
-                  <p className='mt-1 text-xs text-gray-500'>
+                  <p className='mt-1 text-xs text-gray-500 dark:text-gray-300'>
                     1.2M views · {timeAgo(video.snippet.publishedAt)} ago
                   </p>
                 </Link>

@@ -5,11 +5,12 @@
 => subscribe channel page
 
 
-popular videos => fetch => channel icon ? X => channel id => channel info => fetch (channel ID) => channel icon => append popular videos data
-
-1. fetch all popular videos 
-2. extract all channel ids
-3. fetch channel info from channel ids
-4. create object {channelId : channelData}
-5. iterate over all popular videos 
-    => update the object by appending channel data to its respective video
+text-black => dark:text-slate-100
+bg-white => dark:bg-slate-900
+hover:bg-gray-200 => dark:hover:bg-white/20
+border-gray-300 => dark:border-slate-700
+bg-slate-300 => dark:bg-slate-700
+text-gray-600 => dark:text-gray-400
+text-neutral-600 => dark:text-neutral-400
+hover:bg-gray-300 => dark:hover:bg-white/30
+bg-gray-200 => dark:bg-white/20

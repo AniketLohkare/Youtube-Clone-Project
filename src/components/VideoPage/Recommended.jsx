@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { formatNumber } from '../utils/formatNumber'
+import { formatNumber } from '../../utils/formatNumber'
+import RecommendedSkeleton from '../../skeletons/VideoSkeleton/RecommendedSkeleton'
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
 const Recommended = ({ videoData }) => {
   const [recommendedVideos, setRecommendedVideos] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
   const [error, setError] = useState(null)
 
   const fetchRecommendedVideos = async () => {
@@ -12,7 +15,7 @@ const Recommended = ({ videoData }) => {
       setError(null)
       if (!videoData) return
       const categoryId = videoData.snippet.categoryId
-      const fetchVideosUsingCategoryIdUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=US&videoCategoryId=${categoryId}&key=${API_KEY}`
+      const fetchVideosUsingCategoryIdUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=24&regionCode=US&videoCategoryId=${categoryId}&key=${API_KEY}`
       const response = await fetch(fetchVideosUsingCategoryIdUrl)
       if (!response.ok)
         throw new Error(
@@ -23,6 +26,7 @@ const Recommended = ({ videoData }) => {
         (video) => video.id !== videoData.id,
       )
       setRecommendedVideos(filteredList || [])
+      setIsLoading(false)
     } catch (error) {
       console.error(error)
       setError('Failed to load recommended videos. Please try again.')
@@ -32,6 +36,8 @@ const Recommended = ({ videoData }) => {
   useEffect(() => {
     fetchRecommendedVideos()
   }, [videoData])
+
+  if (isLoading) return <RecommendedSkeleton />
 
   return (
     <div
@@ -46,7 +52,7 @@ const Recommended = ({ videoData }) => {
             <Link
               key={videoData.id}
               to={`/video/${videoData.id}`}
-              className='flex flex-col gap-3 self-start p-1.5 hover:bg-gray-200 sm:transition-all sm:duration-200 sm:ease-in-out sm:hover:scale-105 lg:flex-row'
+              className='flex flex-col gap-3 self-start p-1.5 hover:bg-gray-200 sm:transition-all sm:duration-200 sm:ease-in-out sm:hover:scale-105 lg:flex-row dark:hover:bg-white/20'
             >
               <div className='aspect-video shrink-0 lg:w-3/5'>
                 <img
@@ -55,7 +61,7 @@ const Recommended = ({ videoData }) => {
                   alt='thumbnail'
                 />
               </div>
-              <div id='info ' className='flex min-w-0 flex-col'>
+              <div id='info' className='min-w-0'>
                 <h3 className='line-clamp-2 text-sm font-bold'>
                   {videoData.snippet.title}
                 </h3>

@@ -22,7 +22,7 @@ const Input = ({ autoFocus = false }) => {
 
   return (
     <form onSubmit={handleSearch} className='flex items-center'>
-      <div className='relative flex h-9 min-w-0 flex-1 rounded-l-4xl border-2 border-gray-300 transition-colors focus-within:border-blue-500 focus-within:ring-0 focus-within:ring-blue-500'>
+      <div className='relative flex h-9 min-w-0 flex-1 rounded-l-4xl border-2 border-gray-300 transition-colors focus-within:border-blue-500 focus-within:ring-0 focus-within:ring-blue-500 dark:border-slate-700'>
         <input
           ref={inputRef}
           onChange={(e) => {
@@ -30,7 +30,7 @@ const Input = ({ autoFocus = false }) => {
             setIsFocused(true)
           }}
           value={userSearch}
-          className='w-full pl-3 outline-none sm:py-0.5 sm:pl-4 md:text-lg'
+          className='w-full pl-3 text-black outline-none sm:py-0.5 sm:pl-4 md:text-lg dark:text-slate-100'
           type='text'
           placeholder='Search'
           onFocus={() => setIsFocused(true)}
@@ -44,7 +44,7 @@ const Input = ({ autoFocus = false }) => {
               inputRef.current.focus()
             }}
             id='clear-btn'
-            className='mr-1 cursor-pointer rounded-full hover:bg-gray-300 sm:p-2'
+            className='mr-1 cursor-pointer rounded-full hover:bg-gray-200 sm:p-2 dark:hover:bg-white/20'
           >
             <X className='h-5 w-5 sm:h-5 sm:w-5' />
           </button>
@@ -58,7 +58,7 @@ const Input = ({ autoFocus = false }) => {
       <button
         type='submit'
         id='search-btn'
-        className='h-9 cursor-pointer rounded-r-4xl border-2 border-gray-300 bg-gray-100 px-4 py-1.5 hover:bg-gray-200 sm:py-2 md:px-5'
+        className='h-9 cursor-pointer rounded-r-4xl border-2 border-gray-300 bg-gray-100 px-4 py-1.5 hover:bg-gray-200 sm:py-2 md:px-5 dark:border-slate-700 dark:bg-white/10 dark:hover:bg-white/20'
       >
         <Search className='h-5 w-5 sm:h-5 sm:w-5' />
       </button>

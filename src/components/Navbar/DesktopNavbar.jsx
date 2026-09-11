@@ -1,8 +1,8 @@
-import logo from '../../assets/logo.png'
 import jack from '../../assets/jack.png'
 import { Link } from 'react-router-dom'
 import { Menu } from 'lucide-react'
 import Input from './Input'
+import { FaRegPlayCircle } from 'react-icons/fa'
 
 const DesktopNavbar = ({ setDesktopSidebar }) => {
   return (
@@ -12,15 +12,16 @@ const DesktopNavbar = ({ setDesktopSidebar }) => {
     >
       <div className='flex shrink-0 items-center gap-1 md:gap-5'>
         <button
-          className='shrink-0 cursor-pointer rounded-full p-2 hover:bg-gray-200'
+          className='shrink-0 cursor-pointer rounded-full p-2 hover:bg-gray-200 dark:hover:bg-white/20'
           onClick={() => {
             setDesktopSidebar((prev) => !prev)
           }}
         >
           <Menu className='h-6 w-6' />
         </button>
-        <Link className='w-32 shrink-0' to={'/'}>
-          <img src={logo} alt='logo button' />
+        <Link className='flex shrink-0 items-center gap-2' to='/'>
+          <FaRegPlayCircle className='h-8 w-8 text-sky-400' />
+          <span className='text-lg font-bold'>VidTube</span>
         </Link>
       </div>
       <div className='w-full max-w-xl'>

@@ -1,10 +1,10 @@
-import logo from '../../assets/logo.png'
 import jack from '../../assets/jack.png'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Menu, Search } from 'lucide-react'
 
 import Input from './Input'
 import { useState } from 'react'
+import { FaRegPlayCircle } from 'react-icons/fa'
 
 const MobileNavbar = ({ setMobileSidebar }) => {
   const [isSearchClicked, setIsSearchClicked] = useState(false)
@@ -13,7 +13,7 @@ const MobileNavbar = ({ setMobileSidebar }) => {
     <div className='flex items-center justify-between gap-1'>
       <button
         id='back-btn'
-        className='shrink-0 cursor-pointer rounded-full p-1 px-1 hover:bg-gray-300'
+        className='shrink-0 cursor-pointer rounded-full p-1 px-1 hover:bg-gray-200  dark:hover:bg-white/20'
         onClick={() => setIsSearchClicked(false)}
       >
         <ArrowLeft className='h-6 w-6' />
@@ -26,20 +26,21 @@ const MobileNavbar = ({ setMobileSidebar }) => {
     <nav id='mobile-navbar' className='flex items-center justify-between'>
       <div id='left-div' className='flex shrink-0 items-center gap-2'>
         <button
-          className='shrink-0 cursor-pointer rounded-full p-1 hover:bg-gray-200'
+          className='shrink-0 cursor-pointer rounded-full p-1 hover:bg-gray-200 dark:hover:bg-white/20'
           onClick={() => setMobileSidebar(true)}
         >
           <Menu className='h-6 w-6' />
         </button>
-        <Link className='w-30 shrink-0' to={'/'}>
-          <img src={logo} alt='logo button' />
+        <Link className='flex shrink-0 items-center gap-2' to='/'>
+          <FaRegPlayCircle className='h-7 w-7 text-sky-400' />
+          <span className='text-lg font-bold'>VidTube</span>
         </Link>
       </div>
       <div id='right-div' className='flex shrink-0 items-center gap-4'>
         <button
           onClick={() => setIsSearchClicked(true)}
           id='search'
-          className='shrink-0 cursor-pointer overflow-hidden rounded-full'
+          className='shrink-0 cursor-pointer dark:hover:bg-white/20 overflow-hidden rounded-full p-1 hover:bg-gray-200'
         >
           <Search className='h-7 w-7' />
         </button>

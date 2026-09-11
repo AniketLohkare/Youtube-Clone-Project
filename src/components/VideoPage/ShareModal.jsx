@@ -37,19 +37,19 @@ const ShareModal = ({ setShowShareModal }) => {
   return (
     <div
       id='share-modal'
-      className='fixed inset-0 top-0 left-0 z-50 m-auto flex h-fit w-[calc(100%-1rem)] max-w-xs flex-col gap-4 rounded-lg bg-white p-3 sm:max-w-md sm:gap-6 sm:rounded-2xl sm:p-6'
+      className='fixed inset-0 top-0 left-0 z-50 m-auto flex h-fit w-[calc(100%-1rem)] max-w-xs flex-col gap-4 rounded-lg bg-white p-3 sm:max-w-md sm:gap-6 sm:rounded-2xl sm:p-6 dark:bg-slate-900'
     >
       <div className='flex items-center justify-between font-semibold'>
         <h4 className='text-xl sm:text-2xl'>Shareable this video</h4>
         <button
           id='close-btn'
-          className='cursor-pointer rounded-full bg-gray-200 p-1.5 hover:bg-gray-300 sm:p-2'
+          className='cursor-pointer rounded-full bg-gray-200 p-1.5 hover:bg-gray-300 sm:p-2 dark:bg-white/20 dark:hover:bg-white/30'
           onClick={() => setShowShareModal(false)}
         >
           <X className='h-5 w-5 sm:h-7 sm:w-7' />
         </button>
       </div>
-      <hr className='text-gray-400' />
+      <hr className='border-gray-300 dark:border-gray-700' />
       <div id='share-link' className='flex flex-col gap-2 sm:gap-3'>
         <h5 className='text-lg sm:text-xl'>Share this link via</h5>
         <div id='icons' className='flex items-center justify-between gap-1'>
@@ -87,7 +87,7 @@ const ShareModal = ({ setShowShareModal }) => {
       </div>
       <div id='copy-link' className='flex flex-col gap-2 sm:gap-3'>
         <h5 className='text-lg sm:text-xl'>Or copy link</h5>
-        <div className='flex items-center justify-between gap-2 rounded-md border border-gray-300 p-1 sm:gap-5 sm:rounded-lg sm:border-2 sm:p-2'>
+        <div className='flex items-center justify-between gap-2 rounded-md border border-gray-300 p-1 sm:gap-5 sm:rounded-lg sm:border-2 sm:p-2 dark:border-slate-700'>
           <div className='flex flex-1 items-center gap-1'>
             <Link className='h-3 w-3 sm:h-5 sm:w-5' />
             <span className='truncate text-xs select-none sm:text-lg'>

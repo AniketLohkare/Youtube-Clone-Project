@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import PlayVideo from '../components/PlayVideo'
-import Recommended from '../components/Recommended'
+import PlayVideo from '../components/VideoPage/PlayVideo'
+import Recommended from '../components/VideoPage/Recommended'
 
 const Video = () => {
   const [videoData, setVideoData] = useState(null)

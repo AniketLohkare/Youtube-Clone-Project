@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { timeAgo } from '../utils/timeAgo'
+import SearchSkeleton from '../skeletons/SearchSkeleton'
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
 const Search = () => {
@@ -9,6 +10,7 @@ const Search = () => {
   const query = searchParams.get('query')
   const [results, setResults] = useState([])
   const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchResults = async () => {
     try {
@@ -79,6 +81,7 @@ const Search = () => {
       }))
 
       setResults(enrichedResults)
+      setIsLoading(false)
     } catch (error) {
       console.error(error)
       setError('Failed to load search results. Please try again.')
@@ -88,6 +91,8 @@ const Search = () => {
   useEffect(() => {
     fetchResults()
   }, [query])
+
+  if (isLoading) return <SearchSkeleton />
 
   return (
     <div className='flex flex-col gap-5'>
@@ -109,7 +114,7 @@ const Search = () => {
               <h3 className='line-clamp-2 text-lg font-semibold lg:line-clamp-3'>
                 {result.snippet.title}
               </h3>
-              <div className='flex flex-wrap items-center gap-x-4 gap-y-0.5 text-gray-600 xl:flex-col xl:items-start xl:gap-y-1'>
+              <div className='flex flex-wrap items-center gap-x-4 gap-y-0.5 text-gray-600 xl:flex-col xl:items-start xl:gap-y-1 dark:text-gray-400'>
                 <div className='flex items-center gap-2'>
                   <button className='h-6 w-6 md:h-7 md:w-7'>
                     <img
@@ -118,7 +123,7 @@ const Search = () => {
                       alt='channel-icon'
                     />
                   </button>
-                  <h4 className='hover:text-gray-950'>
+                  <h4 className='hover:text-gray-950 dark:hover:text-gray-100'>
                     {result.snippet.channelTitle}
                   </h4>
                 </div>
@@ -129,7 +134,7 @@ const Search = () => {
                   </span>
                 </div>
               </div>
-              <p className='hidden text-sm text-gray-600 sm:line-clamp-2 lg:line-clamp-4'>
+              <p className='hidden text-sm text-gray-600 sm:line-clamp-2 lg:line-clamp-4 dark:text-gray-400'>
                 {result.snippet.description}
               </p>
             </div>
